@@ -5,8 +5,7 @@ Spring boot 3.5.14
 Angular 19.2.26
 Node.js 18.20.8
 
-git clone https://github.com/AraiGonzalez/Desafio-FACTORIT.git
-
+git clone https://github.com/AraiGonzalez/Desafio--FACTORIT.git
 Backend
 cd cart_service
 Disponible en: http://localhost:8080
@@ -29,5 +28,5 @@ Documentación de los endpoints REST disponible en:
 http://localhost:8080/swagger-ui.html
 
 SOAP
-WSDL disponible en: http://localhost:8080/ws/customers.wsdl
-Para probar los endpoints SOAP en Postman (POST con body XML al endpoint http://localhost:8080/ws). 
+Para probar los endpoints SOAP ui link para escargar: https://www.soapui.org/downloads/soapui/ 
+una ves abierto file-- new SOAP project -- initial WSDL http://localhost:8080/ws/customers.wsdl
