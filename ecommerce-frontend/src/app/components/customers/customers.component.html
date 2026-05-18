@@ -1,0 +1,125 @@
+<div class="page">
+  <h2>Gestión de Clientes VIP</h2>
+
+  <!-- Filtro por mes -->
+  <div class="card">
+    <h3>Consultas por Mes</h3>
+
+    <div class="form-row">
+      <input
+        type="number"
+        [(ngModel)]="filterYear"
+        placeholder="Año"
+        min="2020"
+        max="2099"
+      />
+
+      <input
+        type="number"
+        [(ngModel)]="filterMonth"
+        placeholder="Mes"
+        min="1"
+        max="12"
+      />
+      <button (click)="recalculate()" class="btn-warning">
+        Recalcular VIP del Mes
+      </button>
+      <button (click)="loadNewVip()" class="btn-primary">
+        Pasaron a VIP
+      </button>
+
+      <button (click)="loadLostVip()" class="btn-secondary">
+        Dejaron de ser VIP
+      </button>
+
+
+    </div>
+  
+  </div>
+
+<div class="card" *ngIf="viewMode === 'ALL'">
+  <h3>Todos los Clientes</h3>
+
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of allCustomers">
+        <td>{{ c.id }}</td>
+        <td>{{ c.name }}</td>
+        <td>{{ c.email }}</td>
+        <td>
+          <span [class]="c.vip ? 'badge vip' : 'badge'">
+            {{ c.vip ? '⭐ VIP' : 'Común' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+  <!-- Clientes que pasaron a VIP -->
+ 
+ <div class="card" *ngIf="viewMode === 'NEW_VIP'">
+
+  <h3>
+    Pasaron a ser VIP en {{ filterMonth }}/{{ filterYear }}
+  </h3>
+
+  <p *ngIf="newVipCustomers.length === 0">
+    No hubo clientes que pasaran a VIP
+  </p>
+
+  <table *ngIf="newVipCustomers.length > 0" class="items-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of newVipCustomers">
+        <td>{{ c.name }}</td>
+        <td>{{ c.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+  <!-- Clientes que dejaron de ser VIP -->
+ <div class="card" *ngIf="viewMode === 'LOST_VIP'">
+
+  <h3>
+    Dejaron de ser VIP en {{ filterMonth }}/{{ filterYear }}
+  </h3>
+
+  <p *ngIf="lostVipCustomers.length === 0">
+    No hubo clientes que perdieran el estado VIP
+  </p>
+
+  <table *ngIf="lostVipCustomers.length > 0" class="items-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of lostVipCustomers">
+        <td>{{ c.name }}</td>
+        <td>{{ c.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
