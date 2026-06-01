@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://ecommerce.com/soap/customers"
+           targetNamespace="http://ecommerce.com/soap/customers"
+           elementFormDefault="qualified">
+
+    <!-- Tipo compartido para todos los clientes en las respuestas -->
+    <xs:complexType name="CustomerDTO">
+        <xs:sequence>
+            <xs:element name="id"    type="xs:long"/>
+            <xs:element name="name"  type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="vip"   type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ══════════════════════════════════════════════════════════
+         OPERACION 1: Clientes VIP activos actualmente
+         Request: sin parámetros
+         Response: lista de clientes VIP
+    ══════════════════════════════════════════════════════════ -->
+    <xs:element name="GetVipCustomersRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetVipCustomersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:CustomerDTO"
+                            minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ══════════════════════════════════════════════════════════
+         OPERACION 2: Clientes que PASARON a ser VIP en un mes
+         Request: year + month
+         Response: lista de clientes que ganaron VIP ese mes
+    ══════════════════════════════════════════════════════════ -->
+    <xs:element name="GetNewVipByMonthRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="year"  type="xs:int"/>
+                <xs:element name="month" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ══════════════════════════════════════════════════════════
+         OPERACION 3: Clientes que DEJARON de ser VIP en un mes
+         Request: year + month
+         Response: lista de clientes que perdieron VIP ese mes
+    ══════════════════════════════════════════════════════════ -->
+    <xs:element name="GetLostVipByMonthRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="year"  type="xs:int"/>
+                <xs:element name="month" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
